@@ -1,4 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
+import { HeroDetailComponent } from './hero-detail';
 
 export class Hero {
   id: number;
@@ -21,17 +22,13 @@ export class Hero {
                     </a>
                 </div>
               </div>
-              <div *ngIf="selectedHero" class="ui compact blue segment">
-                <h2>{{selectedHero.name}} details!</h2>
-                <p><label class="ui horizontal label">id: </label>{{selectedHero.id}}</p>
-                <p><label class="ui horizontal label">name: </label>
-                  <input [(ngModel)]="selectedHero.name" placeholder="name" class="ui input">
-                </p>
-              </div>
-            `
+              <my-hero-detail [hero]="selectedHero"></my-hero-detail>
+            `,
+  directives: [HeroDetailComponent]
 })
 export class Angular2HeroesAppComponent {
-  @HostBinding('class') appClass = 'ui container';
+  @HostBinding('class')
+  appClass = 'ui container';
   title = 'Tour of Heroes';
   selectedHero: Hero;
   heroes = HEROES;
