@@ -1,5 +1,6 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { HeroDetailComponent } from './hero-detail';
+import { HeroService } from './shared';
 
 export class Hero {
   id: number;
@@ -24,26 +25,22 @@ export class Hero {
               </div>
               <my-hero-detail [hero]="selectedHero"></my-hero-detail>
             `,
-  directives: [HeroDetailComponent]
+  directives: [HeroDetailComponent],
+  providers: [HeroService]
 })
-export class Angular2HeroesAppComponent {
+export class Angular2HeroesAppComponent implements OnInit {
   @HostBinding('class')
   appClass = 'ui container';
   title = 'Tour of Heroes';
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[];
+  constructor(private heroService: HeroService) { }
+  getHeroes() {
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
   onSelect(hero: Hero) { this.selectedHero = hero; }
-}
 
-var HEROES: Hero[] = [
-  { "id": 11, "name": "Mr. Nice" },
-  { "id": 12, "name": "Narco" },
-  { "id": 13, "name": "Bombasto" },
-  { "id": 14, "name": "Celeritas" },
-  { "id": 15, "name": "Magneta" },
-  { "id": 16, "name": "RubberMan" },
-  { "id": 17, "name": "Dynama" },
-  { "id": 18, "name": "Dr IQ" },
-  { "id": 19, "name": "Magma" },
-  { "id": 20, "name": "Tornado" }
-];
+  ngOnInit() {
+    this.getHeroes();
+  } 
+}
