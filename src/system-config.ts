@@ -3,10 +3,12 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'angular2-in-memory-web-api': 'vendor/angular2-in-memory-web-api',
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'angular2-in-memory-web-api': { defaultExtension: 'js', main: 'index' }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

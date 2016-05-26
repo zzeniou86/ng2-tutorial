@@ -12,7 +12,8 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-      'semantic-ui-css/semantic.min.css'
+      'semantic-ui-css/semantic.min.css',
+      'angular2-in-memory-web-api/*.js'
     ]
   });
 };
