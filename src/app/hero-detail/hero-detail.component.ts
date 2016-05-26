@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Hero } from '../shared';
+import { Component, OnInit } from '@angular/core';
+import { Hero, HeroService } from '../shared';
+import { RouteParams } from '@angular/router-deprecated';
 
 @Component({
   selector: 'my-hero-detail',
@@ -10,10 +11,23 @@ import { Hero } from '../shared';
                 <p><label class="ui horizontal label">name: </label>
                   <input [(ngModel)]="hero.name" placeholder="name" class="ui input">
                 </p>
-              </div>           
+                <button (click)="goBack()" class="ui button">Back</button>
+              </div>        
             `
 })
-export class HeroDetailComponent {
-  @Input()
+export class HeroDetailComponent implements OnInit {
   hero: Hero;
+
+  constructor(private heroService: HeroService, private routeParams: RouteParams ) { }
+
+  goBack() {
+    window.history.back();
+  }
+
+  ngOnInit() {
+    let id = +this.routeParams.get('id');
+    this.heroService.getHero(id)
+      .then(hero => this.hero = hero);
+  }
+
 }
